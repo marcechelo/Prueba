@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder } from '@angular/forms';
+import { FormBuilder, FormControl, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-api',
@@ -9,9 +9,9 @@ import { FormBuilder } from '@angular/forms';
 })
 export class ApiComponent implements OnInit {
 
-  userData:any;
+  userData:any = null;
   tokenForm = this.formBuilder.group({
-    token: ''
+    token: ['',Validators.required]
   })
 
   constructor(private http: HttpClient,
@@ -26,9 +26,9 @@ export class ApiComponent implements OnInit {
     let body = {}
     console.log(this.tokenForm.value.token)
     this.http.post<any>('https://api.github.com/user', body, { headers }).subscribe(data => {
-      console.log(data)
-          this.userData = data;
-      });
+      console.log(data);
+      this.userData = data;
+    });
       return this.userData;
   }
 
