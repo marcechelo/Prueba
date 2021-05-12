@@ -1,0 +1,54 @@
+.sidenav {
+    
+    &_arrow {
+        text-align: right;
+        margin-right: 1.2rem;
+        padding: 0.7rem 0;
+    }
+    &_items {
+        height: 100vh;
+        position: fixed;
+        &--options {
+            margin: 1.3rem 0;
+        }
+        &--config {
+            margin-top: 1.2rem;
+            h3 {
+                text-align: center;
+                font-size: 17px;
+            }
+        }
+      
+    }
+    &_item {
+        margin-bottom: 2.5rem;
+        display: flex;
+        align-items: center;
+        padding-right: 7rem;
+        padding-left: 0.5rem;
+        cursor: pointer;
+        a {
+            text-decoration: none;
+            color: rgb(138, 132, 132);
+        }
+        &-text {
+            margin-left: 2rem;
+            font-size: 1.1rem;
+            font-size: 17px;
+        }
+        
+    }
+} 
+
+.main_content {
+    background-color: #fff;
+    margin-top: 3.2rem;
+    position: relative;
+    min-height: 80vh;
+}
+
+.main_container {
+    background-color: #fff;
+    margin: 3.2rem 0;
+   
+}

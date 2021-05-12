@@ -1,0 +1,48 @@
+<mat-sidenav-container class="sidenav">
+    <mat-sidenav class="sidenav_items" mode="side" opened>
+        <div class="sidenav_arrow">
+            <mat-icon aria-hidden="false" aria-label="Example notifications icon">keyboard_arrow_left</mat-icon>
+        </div>
+        <mat-divider></mat-divider>
+        <div class="sidenav_items--options">
+  
+            <div class="sidenav_item">
+                <a routerLink="api">
+                    <mat-icon aria-hidden="false" aria-label="Example shopping_cart icon">api</mat-icon>
+                    <span class="sidenav_item-text">Administrador API</span>
+                </a>
+            </div>
+            
+            <div class="sidenav_item">
+                <a routerLink="db">
+                    <mat-icon aria-hidden="false" aria-label="Example label icon">description</mat-icon>
+                    <span class="sidenav_item-text">Adminsitrador DB</span>
+                </a>
+                
+            </div>
+    
+        </div>
+        
+        <mat-divider></mat-divider>
+
+        <div class="sidenav_items--config">
+            
+            <h3 class="title">Información</h3>
+
+            <div class="sidenav_item">
+                <a routerLink="charts">
+                    <mat-icon aria-hidden="false" aria-label="Example shopping_cart icon">insights</mat-icon>
+                    <span class="sidenav_item-text">Gráficos</span>
+                </a>
+            </div>
+       
+        </div>
+        
+
+    </mat-sidenav>
+    <mat-sidenav-content class="main_content" style="margin-left: 210px;">
+        <div class="main_container">
+            <router-outlet></router-outlet>
+        </div>
+    </mat-sidenav-content>
+</mat-sidenav-container>
