@@ -8,6 +8,11 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 
+import { WelcomeComponent } from './welcome/welcome.component';
+import { ApiComponent } from './api/api.component';
+import { DatabaseComponent } from './database/database.component';
+import { ChartsComponent } from './charts/charts.component';
+
 //Angular Material Componets
 import { MatSliderModule } from '@angular/material/slider';
 import {MatSidenavModule} from '@angular/material/sidenav';
@@ -17,10 +22,10 @@ import {MatCardModule} from '@angular/material/card';
 import {MatInputModule} from '@angular/material/input';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import {MatBadgeModule} from '@angular/material/badge';
-import { WelcomeComponent } from './welcome/welcome.component';
-import { ApiComponent } from './api/api.component';
-import { DatabaseComponent } from './database/database.component';
-import { ChartsComponent } from './charts/charts.component';
+import {MatButtonModule} from '@angular/material/button';
+import { FormlyModule } from '@ngx-formly/core';
+import { FormlyBootstrapModule } from '@ngx-formly/bootstrap';
+import {MatSnackBarModule} from '@angular/material/snack-bar';
 
 @NgModule({
   declarations: [
@@ -45,7 +50,11 @@ import { ChartsComponent } from './charts/charts.component';
     MatBadgeModule,
     FormsModule,
     ReactiveFormsModule,
-    HttpClientModule
+    HttpClientModule,
+    MatButtonModule,
+    FormlyModule.forRoot({ extras: { lazyRender: true } }),
+    FormlyBootstrapModule,
+    MatSnackBarModule
   ],
   providers: [],
   bootstrap: [AppComponent]

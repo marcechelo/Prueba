@@ -21,7 +21,9 @@
       
     }
     &_item {
+        height: 5rem;
         margin-bottom: 2.5rem;
+        margin-top: 2.5rem;
         display: flex;
         align-items: center;
         padding-right: 7rem;
@@ -33,10 +35,15 @@
         }
         &-text {
             margin-left: 2rem;
+            margin-bottom: 0.5rem;
             font-size: 1.1rem;
             font-size: 17px;
         }
         
+    }
+
+    &_item:hover {
+        background-color: rgba(209, 209, 209, 0.2);
     }
 } 
 
