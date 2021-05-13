@@ -27,11 +27,23 @@
                 </mat-list-option>
             </mat-selection-list>
         </div>
-        <div class="col-sm-7">
+        <div class="col-sm-8">
             <h1>Otros</h1>
             <form [formGroup]="form" (ngSubmit)="onSubmit()">
                 <formly-form [model]="model" [fields]="fields" [options]="options" [form]="form"></formly-form>
-                <button type="submit" class="btn btn-primary submit-button" [disabled]="!form.valid">Submit</button>
+                
+                <div style="text-align: right; padding-right: 18.5rem; padding-top: 1rem;">
+                    <!--<button class="actionButon" type="submit" mat-flat-button color="primary" [disabled]="!form.valid">Modificar</button>
+                    <button class="actionButon" mat-flat-button color="accent" [disabled]="!form.valid">Nuevo Registro</button>
+                    <button class="actionButon" mat-flat-button color="warn" [disabled]="!form.valid">Eliminar</button>
+                    <button class="actionButon" mat-flat-button color="primary" [disabled]="!form.valid">Eliminar</button>-->
+                    <button type="button" class="btn btn-primary actionButon" [disabled]="!form.valid" (click)="updateData()">Editar</button>
+                    <button type="button" class="btn btn-success actionButon" [disabled]="!form.valid">Nuevo Registro</button>
+                    <button type="button" class="btn btn-danger actionButon" [disabled]="!form.valid">Eliminar</button>
+                    <button type="button" class="btn btn-secondary actionButon" [disabled]="!form.valid" (click)="resetModel()">Limpiar</button>
+                    
+                </div>
+                
             </form>
         </div>
         <div class="col-sm-1"></div>
