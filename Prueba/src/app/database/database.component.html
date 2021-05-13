@@ -19,7 +19,7 @@
         <div class="col-sm-1"></div>
         <div class="col-sm-3">
             <div>
-                <h1>Usuario de Github</h1>
+                <h1>Github Users</h1>
             </div>
             <mat-selection-list #shoes [multiple]="false">
                 <mat-list-option *ngFor="let user of usersDataArray; let i = index" [value]="user" (click)="changeUser(user)">
@@ -27,20 +27,20 @@
                 </mat-list-option>
             </mat-selection-list>
         </div>
-        <div class="col-sm-8">
-            <h1>Otros</h1>
-            <form [formGroup]="form" (ngSubmit)="onSubmit()">
+        <div class="col-sm-8 formDiv">
+            <h1>User Info</h1>
+            <form [formGroup]="form">
                 <formly-form [model]="model" [fields]="fields" [options]="options" [form]="form"></formly-form>
                 
-                <div style="text-align: right; padding-right: 18.5rem; padding-top: 1rem;">
+                <div class="formDiv_buttons">
                     <!--<button class="actionButon" type="submit" mat-flat-button color="primary" [disabled]="!form.valid">Modificar</button>
                     <button class="actionButon" mat-flat-button color="accent" [disabled]="!form.valid">Nuevo Registro</button>
                     <button class="actionButon" mat-flat-button color="warn" [disabled]="!form.valid">Eliminar</button>
                     <button class="actionButon" mat-flat-button color="primary" [disabled]="!form.valid">Eliminar</button>-->
-                    <button type="button" class="btn btn-primary actionButon" [disabled]="!form.valid" (click)="updateData()">Editar</button>
-                    <button type="button" class="btn btn-success actionButon" [disabled]="!form.valid">Nuevo Registro</button>
-                    <button type="button" class="btn btn-danger actionButon" [disabled]="!form.valid">Eliminar</button>
-                    <button type="button" class="btn btn-secondary actionButon" [disabled]="!form.valid" (click)="resetModel()">Limpiar</button>
+                    <button type="button" class="btn btn-primary actionButon" [disabled]="!form.valid || userGit.id == null" (click)="updateUserData()">Modify</button>
+                    <button type="button" class="btn btn-success actionButon" [disabled]="!form.valid" (click)="newUser()">New Record</button>
+                    <button type="button" class="btn btn-danger actionButon" [disabled]="!form.valid || userGit.id == null" (click)="deleteUser()">Delete</button>
+                    <button type="button" class="btn btn-secondary actionButon" [disabled]="!form.valid" (click)="resetModel()">Reset</button>
                     
                 </div>
                 

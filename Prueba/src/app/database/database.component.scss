@@ -2,6 +2,19 @@ body{
     overflow: hidden;
 }
 
-.actionButon{
-    margin-right: 1rem;
+.formDiv{
+    h1{
+        text-align: center;
+        margin-left: -7rem;
+    }
+
+    .actionButon{
+        margin-right: 1rem;
+    }
+
+    &_buttons{
+        text-align: right; 
+        padding-right: 18.5rem; 
+        padding-top: 1rem;
+    }
 }

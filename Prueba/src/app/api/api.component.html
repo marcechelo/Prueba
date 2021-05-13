@@ -29,8 +29,8 @@
         <div class="col-sm-4"></div>    
 
         <div class="col-sm-2"></div>
-        <div class="col-sm-8" *ngIf="userData != null" style="margin-top: 2rem; ">
-          <div style="margin-top: 2rem; text-align: center; font-weight: bolder;">
+        <div class="col-sm-8 userData" *ngIf="userData != null">
+          <div class="userData_tittle">
             <h1>Información del Usuario</h1>
           </div>
           <table class="table table-striped" style="text-align: center;">
@@ -71,7 +71,7 @@
                 </tr>
               </tbody>
           </table>
-          <div style="text-align: right;">
+          <div class="userData_button">
             <button mat-raised-button color="primary" (click)="saveGithubUser()">Guardar</button>
           </div>
             

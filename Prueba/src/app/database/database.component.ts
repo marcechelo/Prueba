@@ -1,7 +1,10 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import {FormGroup} from '@angular/forms';
+import { MatSnackBar, _SnackBarContainer } from '@angular/material/snack-bar';
 import {FormlyFieldConfig, FormlyFormOptions} from '@ngx-formly/core';
+import { throwError } from 'rxjs';
+import { catchError } from 'rxjs/operators';
 
 @Component({
   selector: 'app-database',
@@ -10,12 +13,18 @@ import {FormlyFieldConfig, FormlyFormOptions} from '@ngx-formly/core';
 })
 export class DatabaseComponent implements OnInit {
 
+  modelButton = {
+    left: true,
+    middle: false,
+    right: false
+  };
   typesOfShoes: string[] = ['Boots', 'Clogs', 'Loafers', 'Moccasins', 'Sneakers'];
   form = new FormGroup({});
   model: any = {};
   options: FormlyFormOptions = {};
   usersArray: any = [];
   usersDataArray: any = [];
+  apiUrl:string = 'http://localhost:3000/github-users/'
   userGit = {
     "id": null,
     "login": null,
@@ -136,20 +145,17 @@ export class DatabaseComponent implements OnInit {
     },
   ];;
 
-  constructor(private http: HttpClient) { 
+  constructor(private http: HttpClient,
+              private _snackBar: MatSnackBar) { 
   }
 
   ngOnInit(): void {
     this.getGithubUsers();
   }
 
-  onSubmit() {
-    alert(JSON.stringify(this.model));
-  }
-
   //Get user data from database, create
   getGithubUsers(){
-    this.http.get<any>('http://localhost:3000/github-users').subscribe(data => {
+    this.http.get<any>(this.apiUrl).subscribe(data => {
       this.usersDataArray = data;
     });
   }
@@ -161,6 +167,8 @@ export class DatabaseComponent implements OnInit {
 
   //Reset model to clean inputs
   resetModel(){
+    this.model = {};
+
     this.userGit = {
       "id": null,
       "login": null,
@@ -174,16 +182,73 @@ export class DatabaseComponent implements OnInit {
   }
 
   //Update values of user data
-  updateData(){
+  updateUserData(){
     let header = {};
     let body = this.model;
-    console.log(body);
-    
-    let url = 'http://localhost:3000/github-users/' + this.userGit.id;
-    this.http.put<any>(url, body).subscribe(data => {
-      console.log(data)
+    let url = this.apiUrl + this.userGit.id;
+    this.http.put<any>(url, body)
+    .pipe(
+      catchError((err) => {
+        this.openSnackBar("User not modified", "Error");
+        console.log('error caught in service')
+        console.error(err);
+        return throwError(err);
+      })
+    )
+    .subscribe(data => {
+      this.openSnackBar("User " + this.model.login + " modified", "Success");
       this.getGithubUsers();
     });
+  }
+
+  //Delete user from database
+  deleteUser(){
+    let url = this.apiUrl + this.userGit.id;
+    this.http.delete<any>(url)
+    .pipe(
+      catchError((err) => {
+        this.openSnackBar("User not deleted", "Error");
+        console.log('error caught in service')
+        console.error(err);
+        return throwError(err);
+      })
+    )
+    .subscribe(data => {
+      this.openSnackBar("User " + this.model.login + " deleted", "Success");
+      this.resetModel();
+      this.getGithubUsers();
+    });
+  }
+
+  //Create new user record in database
+  newUser(){
+    let headers = {};
+    let body = this.model;
+    let url = this.apiUrl;
+    this.http.post<any>(url, body)
+    .pipe(
+      catchError((err) => {
+        this.openSnackBar("User not created", "Error");
+        console.log('error caught in service')
+        console.error(err);
+        return throwError(err);
+      })
+    )
+    .subscribe(data => {      
+      this.openSnackBar("User " + this.model.login + " created", "Success");
+      this.resetModel();
+      this.getGithubUsers();
+    });
+  }
+
+  //Open snackBar to show success or error messages
+  openSnackBar(message: string, action: string) {
+    this._snackBar.open(message, action, 
+      {
+        duration: 3000,
+        verticalPosition: 'top',
+        horizontalPosition: 'end'
+      });
   }
 
 }

@@ -1,3 +1,16 @@
 body{
     overflow: hidden;
 }
+
+.userData{
+    margin-top: 2rem;
+
+    &_tittle {
+        margin-top: 2rem; 
+        text-align: center; 
+        font-weight: bolder;
+    }
+    &_button {
+        text-align: right;
+    }
+}
