@@ -16,9 +16,25 @@
 </head>
 <body>
     <div class="row">
-        <div class="col-sm-12" style="text-align: center;">
-            <h2 style="margin-top: 10rem;">Database</h2>
+        <div class="col-sm-1"></div>
+        <div class="col-sm-3">
+            <div>
+                <h1>Usuario de Github</h1>
+            </div>
+            <mat-selection-list #shoes [multiple]="false">
+                <mat-list-option *ngFor="let user of usersDataArray; let i = index" [value]="user" (click)="changeUser(user)">
+                    {{user['login']}}
+                </mat-list-option>
+            </mat-selection-list>
         </div>
+        <div class="col-sm-7">
+            <h1>Otros</h1>
+            <form [formGroup]="form" (ngSubmit)="onSubmit()">
+                <formly-form [model]="model" [fields]="fields" [options]="options" [form]="form"></formly-form>
+                <button type="submit" class="btn btn-primary submit-button" [disabled]="!form.valid">Submit</button>
+            </form>
+        </div>
+        <div class="col-sm-1"></div>
     </div>
 </body>
 </html>

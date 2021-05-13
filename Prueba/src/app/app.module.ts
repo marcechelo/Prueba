@@ -12,6 +12,12 @@ import { WelcomeComponent } from './welcome/welcome.component';
 import { ApiComponent } from './api/api.component';
 import { DatabaseComponent } from './database/database.component';
 import { ChartsComponent } from './charts/charts.component';
+import { CommonModule } from '@angular/common'; 
+
+//ng-formly
+import { FormlyModule } from '@ngx-formly/core';
+import { FormlyBootstrapModule } from '@ngx-formly/bootstrap';
+import { FormlyHorizontalWrapper } from '../app/database/horizontal-wrapper';
 
 //Angular Material Componets
 import { MatSliderModule } from '@angular/material/slider';
@@ -23,9 +29,8 @@ import {MatInputModule} from '@angular/material/input';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import {MatBadgeModule} from '@angular/material/badge';
 import {MatButtonModule} from '@angular/material/button';
-import { FormlyModule } from '@ngx-formly/core';
-import { FormlyBootstrapModule } from '@ngx-formly/bootstrap';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
+import {MatListModule} from '@angular/material/list';
 
 @NgModule({
   declarations: [
@@ -34,7 +39,8 @@ import {MatSnackBarModule} from '@angular/material/snack-bar';
     WelcomeComponent,
     ApiComponent,
     DatabaseComponent,
-    ChartsComponent
+    ChartsComponent,
+    FormlyHorizontalWrapper
   ],
   imports: [
     BrowserModule,
@@ -52,9 +58,17 @@ import {MatSnackBarModule} from '@angular/material/snack-bar';
     ReactiveFormsModule,
     HttpClientModule,
     MatButtonModule,
-    FormlyModule.forRoot({ extras: { lazyRender: true } }),
+    FormlyModule.forRoot({ 
+      extras: { lazyRender: true },
+      wrappers: [{ name: 'form-field-horizontal', component: FormlyHorizontalWrapper }],
+      validationMessages: [
+        { name: 'required', message: 'This field is required' },
+      ],
+     }),
     FormlyBootstrapModule,
-    MatSnackBarModule
+    MatSnackBarModule,
+    MatListModule,
+    CommonModule 
   ],
   providers: [],
   bootstrap: [AppComponent]
